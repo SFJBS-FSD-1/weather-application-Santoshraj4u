@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Sans Weather App</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"><!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script><!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<!--weather info-->
+<div class="col-md-6 col-md-offset-3">
+    <h1 style="color:green">Sans Weather Report</h1>
+    <form method = "post" action='/'>
+        <input type="text" name="city" placeholder="Enter City Name: ">
+        <button type="submit"> Enter </button>
+    </form>
+    {% if mydata.status == 200 %}
+
+   <img src="" id="icon">
+    <script>
+        var val = {{mydata.icon}};
+        document.getElementById('icon').src("http://openweathermap.org/img/w/${val}.png");
+    </script>
+    <h2 style="color:blue;font-family:verdana">City :{{mydata.city}}</h2>
+    <h3>Latitude   :{{mydata.latitude}}</h3>
+    <h3>Longitude  :{{mydata.longitude}}</h3>
+    <h3>Temperature:{{mydata.temp}}</h3>
+    <h3>Sunrise:{{mydata.sunrise}}</h3>
+    <h3>Sunset:{{mydata.sunset}}</h3>
+
+    {% elif mydata.status == '404' or mydata.status == '400' %}
+    <h3>{{mydata.message}}</h3>
+    {% endif %}
+</div>
+</body>
+</html>
